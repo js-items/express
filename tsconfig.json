@@ -1,0 +1,11 @@
+{
+  "extends": "./node_modules/@kube-js/tscommons/configs/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "typeRoots": ["./@types", "./node_modules/@types"],
+  },
+  "lib": [],
+  "includes": ["src/**/*"],
+  "exclude": ["node_modules", "dist/**/*"]
+}
