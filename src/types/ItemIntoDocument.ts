@@ -2,7 +2,7 @@ import { Item } from "@js-items/foundation";
 import { Request, Response } from "express";
 
 export interface Options<I> {
-  readonly item: I | Partial<I>;
+  readonly item: I;
   readonly req: Request;
   readonly res: Response;
 }

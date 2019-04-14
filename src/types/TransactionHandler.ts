@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 
-export interface Opts {
+export interface Options {
   readonly req: Request;
   readonly res: Response;
 }
 
-export interface HandlerOpts {
+export interface HandlerOptions {
   readonly transactionId: string;
 }
 
-export type Handler = (opts: HandlerOpts) => Promise<void>;
+export type Handler = (options: HandlerOptions) => Promise<void>;
 
-type TransactionHandler = (opts: Opts, handler: Handler) => Promise<void>;
+type TransactionHandler = (options: Options, handler: Handler) => Promise<void>;
 
 export default TransactionHandler;

@@ -8,6 +8,14 @@ import TransactionHandler from './types/TransactionHandler';
 import RequestHandlerFactory from './types/RequestHandlerFactory';
 
 export default interface FactoryConfig<I extends Item> {
+  readonly enableJsonBodyParser?: boolean;
+  readonly totalHeaderName?: string;
+  readonly hasAfterHeaderName?: string;
+  readonly afterHeaderName?: string;
+  readonly hasBeforeHeaderName?: string;
+  readonly beforeHeaderName?: string;
+  readonly envelopParamName?: string;
+  readonly prettyParamName?: string;
   readonly createFilter?: CreateFilter<I>;
   readonly createPatch?: CreatePatch<I>;
   readonly convertDocumentIntoItem?: DocumentIntoItem<I>;
