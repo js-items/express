@@ -8,6 +8,7 @@ import TransactionHandler from './types/TransactionHandler';
 import RequestHandlerFactory from './types/RequestHandlerFactory';
 
 export default interface FactoryConfig<I extends Item> {
+  readonly dataKeyName?: string;
   readonly enableJsonBodyParser?: boolean;
   readonly totalHeaderName?: string;
   readonly hasAfterHeaderName?: string;

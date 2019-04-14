@@ -5,6 +5,7 @@ import _defaultTo from 'ramda/src/defaultTo';
 import FacadeConfig from '../../FacadeConfig';
 import RequestHandlerFactory from '../../types/RequestHandlerFactory';
 import getJsonQueryParam from '../../utils/getJsonQueryParam';
+import sendResponse from '../../utils/sendResponse';
 
 const getItem: RequestHandlerFactory = <I extends Item>(
   config: FacadeConfig<I>
@@ -20,8 +21,14 @@ const getItem: RequestHandlerFactory = <I extends Item>(
       filter: config.createFilter({ filter, req, res }),
       id: req.params.id,
     });
-
-    res.status(OK).json(config.convertItemIntoDocument({ item, req, res }));
+    
+    sendResponse({
+      config,
+      req,
+      res,
+      responseObject: config.convertItemIntoDocument({ item, req, res }),
+      status: OK,
+    });
   });
 };
 

@@ -19,7 +19,8 @@ The main differences to the @js-entity-repos/express:
 - `granular transactions handlers` for each `request handler` - this could be used for i.e. `authentication` or `permissions` checks
 - possibility to `override` each `request handler`
 - ability to disable json body parser middleware if already present in the stack (`enableJsonBodyParser: false`)
-- replaced /count path with optional header available on get request
+- by default all responses are `pretty` which improves readability, you can disabled that by query param (`/endpoint?pretty=false`) 
+- dropped support for `/count` endpoint, instead allows client to get number of available items by adding query param (`/endpoint?total=true` for get request, resulting in additional header: `x-total-count`) 
 
 ## Installation:
 

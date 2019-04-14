@@ -39,11 +39,11 @@ export const sendEnvelopedResponse = <I extends Item>({
   };
 
   /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
-  if (!boolean(req.params[config.prettyParamName])) {
-    return res.json(responseObject);
+  if (req.query[config.prettyParamName] === 'false') {
+    return res.json(data);
   }
 
-  return res.json(JSON.stringify(responseObject, null, 2));
+  return res.json(JSON.stringify(data, null, 2));
 };
 
 export const sendNormalResponse = <I extends Item>({
@@ -55,7 +55,6 @@ export const sendNormalResponse = <I extends Item>({
   status,
 }: Options<I>) => {
   res.status(status);
-
   if (headers !== undefined) {
     _mapObjIndexed((value, key) => {
       if (value !== undefined) {
@@ -67,17 +66,16 @@ export const sendNormalResponse = <I extends Item>({
   if (responseObject === undefined) {
     return res.send();
   }
-
+  
   /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
-  if (!boolean(req.params[config.prettyParamName])) {
-    return res.json(responseObject);
+  if (req.query[config.prettyParamName] === 'false') {
+    return res.json(responseObject[config.dataKeyName]);
   }
 
   return res.json(JSON.stringify(responseObject, null, 2));
 };
 
-const sendResponse = <I extends Item>(options: Options<I>) =>
-  boolean(options.req.params[options.config.envelopeParamName])
+const sendResponse = <I extends Item>(options: Options<I>) => boolean(options.req.query[options.config.envelopeParamName])
     ? sendEnvelopedResponse(options)
     : sendNormalResponse(options);
 

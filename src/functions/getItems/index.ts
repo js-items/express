@@ -4,21 +4,21 @@ import { OutgoingHttpHeaders } from 'http';
 import { OK } from 'http-status-codes';
 import _defaultTo from 'ramda/src/defaultTo';
 import FacadeConfig from '../../FacadeConfig';
+import RequestHandlerFactory from '../../types/RequestHandlerFactory';
 import getJsonQueryParam from '../../utils/getJsonQueryParam';
 import getNumberQueryParam from '../../utils/getNumberQueryParam';
 import sendResponse from '../../utils/sendResponse';
 
-export default <I extends Item>(config: FacadeConfig<I>) => async (
-  req: Request,
-  res: Response
-) => {
+const getItems: RequestHandlerFactory = <I extends Item>(
+  config: FacadeConfig<I>
+) => async (req: Request, res: Response) => {
   const transactionHandler = _defaultTo(config.defaultTransactionHandler)(
-    config.beforeGetItem
+    config.beforeGetItems
   );
 
   await transactionHandler({ req, res }, async () => {
     const filter = getJsonQueryParam(req.query, 'filter');
-    const count = Boolean(req.params.count);
+    const count = Boolean(req.query.count);
     const sort = getJsonQueryParam(req.query, 'sort');
     const limit = getNumberQueryParam(
       req.query,
@@ -40,7 +40,7 @@ export default <I extends Item>(config: FacadeConfig<I>) => async (
     const headers: OutgoingHttpHeaders = {
       [config.afterHeaderName]: cursor.after,
       [config.beforeHeaderName]: cursor.before,
-      [config.beforeHeaderName]: cursor.hasBefore.toString(),
+      [config.hasBeforeHeaderName]: cursor.hasBefore.toString(),
       [config.hasAfterHeaderName]: cursor.hasAfter.toString(),
     };
 
@@ -53,7 +53,7 @@ export default <I extends Item>(config: FacadeConfig<I>) => async (
     }
 
     const responseObject = {
-      data: items.map(item =>
+      [config.dataKeyName]: items.map(item =>
         config.convertItemIntoDocument({ item, req, res })
       ),
     };
@@ -61,3 +61,5 @@ export default <I extends Item>(config: FacadeConfig<I>) => async (
     sendResponse({ req, res, config, status: OK, headers, responseObject });
   });
 };
+
+export default getItems;

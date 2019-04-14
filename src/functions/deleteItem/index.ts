@@ -4,7 +4,8 @@ import { NO_CONTENT } from 'http-status-codes';
 import _defaultTo from 'ramda/src/defaultTo';
 import FacadeConfig from '../../FacadeConfig';
 import RequestHandlerFactory from '../../types/RequestHandlerFactory';
-import getJsonQueryParam from '../utils/getJsonQueryParam';
+import getJsonQueryParam from '../../utils/getJsonQueryParam';
+import sendResponse from '../../utils/sendResponse';
 
 const deleteItem: RequestHandlerFactory = <I extends Item>(
   config: FacadeConfig<I>
@@ -21,7 +22,12 @@ const deleteItem: RequestHandlerFactory = <I extends Item>(
       id: req.params.id,
     });
 
-    res.status(NO_CONTENT).send();
+    sendResponse({
+      config,
+      req,
+      res,
+      status: NO_CONTENT,
+    });
   });
 };
 
