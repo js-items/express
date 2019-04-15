@@ -1,0 +1,1 @@
+{"version":3,"file":"JsonError.js","sourceRoot":"","sources":["../../src/errors/JsonError.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;AAAA,wBAAwB;AACxB,yCAAuC;AAEvC;IAAuC,6BAAS;IAK9C,mBAAY,IAAS,EAAE,IAAc;QAArC,YACE,iBAAO,SAGR;QAFC,KAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,KAAI,CAAC,IAAI,GAAG,IAAI,CAAC;;IACnB,CAAC;IACH,gBAAC;AAAD,CAAC,AAVD,CAAuC,sBAAS,GAU/C"}

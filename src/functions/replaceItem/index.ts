@@ -15,7 +15,7 @@ const replaceItem: RequestHandlerFactory =  <I extends Item>(config: FacadeConfi
 
   await transactionHandler({ req, res }, async () => {
     const filter = getJsonQueryParam(req.query, 'filter');
-
+    
     const result = await config.service.replaceItem({
       filter: config.createFilter({ filter, req, res }),
       id: req.params.id,

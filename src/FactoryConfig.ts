@@ -1,11 +1,11 @@
 import { Item } from '@js-items/foundation';
-import DocumentIntoItem from './types/DocumentIntoItem';
-import CreateFilter from './types/CreateFilter';
-import ItemIntoDocument from './types/ItemIntoDocument';
-import CreatePatch from './types/CreatePatch';
 import Facade from '@js-items/foundation/dist/Facade';
-import TransactionHandler from './types/TransactionHandler';
+import CreateFilter from './types/CreateFilter';
+import CreatePatch from './types/CreatePatch';
+import DocumentIntoItem from './types/DocumentIntoItem';
+import ItemIntoDocument from './types/ItemIntoDocument';
 import RequestHandlerFactory from './types/RequestHandlerFactory';
+import TransactionHandler from './types/TransactionHandler';
 
 export default interface FactoryConfig<I extends Item> {
   readonly dataKeyName?: string;

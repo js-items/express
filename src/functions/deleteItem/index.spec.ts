@@ -20,7 +20,7 @@ jest.mock('uuid', () => ({
 
 const notExistingId = 'not-existing-id';
 
-const deleteItem = jest.fn(({ filter, id }: DeleteItemOptions<TestItem>) => {
+const deleteItem = jest.fn(async({ filter, id }: DeleteItemOptions<TestItem>) => {
   if (
     id !== testItem.id ||
     (filter !== undefined &&

@@ -1,0 +1,1 @@
+{"version":3,"file":"NumberError.js","sourceRoot":"","sources":["../../src/errors/NumberError.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;AAAA,wBAAwB;AACxB,yCAAuC;AAEvC;IAAyC,+BAAS;IAKhD,qBAAY,IAAS,EAAE,IAAc;QAArC,YACE,iBAAO,SAGR;QAFC,KAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,KAAI,CAAC,IAAI,GAAG,IAAI,CAAC;;IACnB,CAAC;IACH,kBAAC;AAAD,CAAC,AAVD,CAAyC,sBAAS,GAUjD"}

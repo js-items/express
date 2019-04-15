@@ -37,7 +37,7 @@ describe('@getItems', () => {
     getItems,
   });
 
-  const { request } = initTests({ service });
+  const { request } = initTests<TestItem>({ service });
 
   const filter = { id: { $in: ['1', '2'] } };
   const sort = { id: 'desc' };
@@ -69,14 +69,14 @@ describe('@getItems', () => {
   };
 
   it('gets items', async () => {
-    await assertOnGetItems({
+    await assertOnGetItems<TestItem>({
       ...defaultOptions,
       expectedParams,
     });
   });
 
   it('gets items when envelope enabled and count query param provided', async () => {
-    await assertOnGetItems({
+    await assertOnGetItems<TestItem>({
       ...defaultOptions,
       expectedParams,
       params: {
@@ -88,7 +88,7 @@ describe('@getItems', () => {
   });
 
   it('gets items when envelope enabled and pretty response is disabled', async () => {
-    await assertOnGetItems({
+    await assertOnGetItems<TestItem>({
       ...defaultOptions,
       expectedParams,
       params: {
@@ -100,7 +100,7 @@ describe('@getItems', () => {
   });
 
   it('throws JsonError when sort is invalid', async () => {
-    await assertOnGetItems({
+    await assertOnGetItems<TestItem>({
       ...defaultOptions,
       params: {
         ...defaultOptions.params,
@@ -111,7 +111,7 @@ describe('@getItems', () => {
   });
 
   it('throws JsonError when sort is invalid', async () => {
-    await assertOnGetItems({
+    await assertOnGetItems<TestItem>({
       ...defaultOptions,
       params: {
         ...defaultOptions.params,
@@ -122,7 +122,7 @@ describe('@getItems', () => {
   });
 
   it('throws NumberError when limit is invalid', async () => {
-    await assertOnGetItems({
+    await assertOnGetItems<TestItem>({
       ...defaultOptions,
       params: {
         ...defaultOptions.params,

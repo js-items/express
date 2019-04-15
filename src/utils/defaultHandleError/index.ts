@@ -27,34 +27,42 @@ const handleError: ErrorHandler = ({ req, res, err, transactionId }) => {
   };
 
   if (err instanceof ConflictingItemError) {
-    return sendErrorResponse(CONFLICT, {
+    sendErrorResponse(CONFLICT, {
       itemId: err.itemId,
       itemName: err.itemName,
     });
+
+    return;
   }
 
   if (err instanceof ItemNotFoundError) {
-    return sendErrorResponse(NOT_FOUND, {
+    sendErrorResponse(NOT_FOUND, {
       itemId: err.itemId,
       itemName: err.itemName,
     });
+
+    return;
   }
 
   if (err instanceof JsonError) {
-    return sendErrorResponse(BAD_REQUEST, {
+    sendErrorResponse(BAD_REQUEST, {
       data: err.data,
       path: err.path,
     });
+
+    return;
   }
 
   if (err instanceof NumberError) {
-    return sendErrorResponse(BAD_REQUEST, {
+    sendErrorResponse(BAD_REQUEST, {
       data: err.data,
       path: err.path,
     });
+
+    return;
   }
 
-  return sendErrorResponse(INTERNAL_SERVER_ERROR, {});
+  sendErrorResponse(INTERNAL_SERVER_ERROR, {});
 };
 
 export default handleError;

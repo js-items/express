@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@createItem creates item 1`] = `
+"{
+  \\"booleanProperty\\": false,
+  \\"id\\": \\"not-existing-id\\",
+  \\"numberProperty\\": 1,
+  \\"stringProperty\\": \\"foo\\"
+}"
+`;
+
+exports[`@createItem creates item when envelope is enabled 1`] = `
+"{
+  \\"headers\\": {
+    \\"x-powered-by\\": \\"Express\\"
+  },
+  \\"response\\": {
+    \\"booleanProperty\\": false,
+    \\"id\\": \\"not-existing-id\\",
+    \\"numberProperty\\": 1,
+    \\"stringProperty\\": \\"foo\\"
+  },
+  \\"status\\": 201
+}"
+`;
+
+exports[`@createItem throws conflicting error when item does exist 1`] = `
+"{
+  \\"itemId\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
+  \\"itemName\\": \\"item\\",
+  \\"transactionId\\": \\"1\\"
+}"
+`;
+
+exports[`@createItem throws conflicting error when item does exist and envelope is enabled and pretty is disabled 1`] = `
+Object {
+  "headers": Object {
+    "x-powered-by": "Express",
+  },
+  "response": Object {
+    "itemId": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
+    "itemName": "item",
+    "transactionId": "1",
+  },
+  "status": 409,
+}
+`;
+
+exports[`@createItem throws conflicting error when item does exist and envelope is enabled and pretty is enabled 1`] = `
+"{
+  \\"headers\\": {
+    \\"x-powered-by\\": \\"Express\\"
+  },
+  \\"response\\": {
+    \\"itemId\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
+    \\"itemName\\": \\"item\\",
+    \\"transactionId\\": \\"1\\"
+  },
+  \\"status\\": 409
+}"
+`;

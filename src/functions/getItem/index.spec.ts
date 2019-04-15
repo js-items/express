@@ -20,7 +20,7 @@ jest.mock('uuid', () => ({
 
 const notExistingId = 'not-existing-id';
 
-const getItem = jest.fn(({ id, filter }) => {
+const getItem = jest.fn(async({ id, filter }) => {
   if (
     id !== testItem.id ||
     filter.booleanProperty !== testItem.booleanProperty

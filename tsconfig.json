@@ -4,8 +4,8 @@
     "rootDir": "src",
     "outDir": "dist",
     "typeRoots": ["./@types", "./node_modules/@types"],
+    "lib": ["dom"],
   },
-  "lib": [],
   "includes": ["src/**/*"],
   "exclude": ["node_modules", "dist/**/*"]
 }
