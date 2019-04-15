@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@getItem get item when envelope is enabled and pretty response is disabled 1`] = `
+Object {
+  "headers": Object {
+    "x-powered-by": "Express",
+  },
+  "response": Object {
+    "booleanProperty": false,
+    "id": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
+    "numberProperty": 1,
+    "stringProperty": "foo",
+  },
+  "status": 200,
+}
+`;
+
+exports[`@getItem successfuly get item 1`] = `
+"{
+  \\"booleanProperty\\": false,
+  \\"id\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
+  \\"numberProperty\\": 1,
+  \\"stringProperty\\": \\"foo\\"
+}"
+`;
+
+exports[`@getItem throws error when item id exists but filter does not match 1`] = `
+"{
+  \\"itemId\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
+  \\"itemName\\": \\"item\\",
+  \\"transactionId\\": \\"1\\"
+}"
+`;
+
+exports[`@getItem throws error when item not found 1`] = `
+"{
+  \\"itemId\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
+  \\"itemName\\": \\"item\\",
+  \\"transactionId\\": \\"1\\"
+}"
+`;

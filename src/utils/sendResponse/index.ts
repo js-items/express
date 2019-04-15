@@ -1,30 +1,41 @@
 // tslint:disable:no-any
 // tslint:disable:no-magic-numbers
-import { Item } from '@js-items/foundation';
 import boolean from 'boolean';
 import { Request, Response } from 'express';
 import { OutgoingHttpHeaders } from 'http';
 import { OK } from 'http-status-codes';
 import _mapObjIndexed from 'ramda/src/mapObjIndexed';
-import FacadeConfig from '../../FacadeConfig';
 
-export interface Options<I extends Item> {
+export interface Config {
+  readonly dataKeyName: string;
+  readonly prettyParamName: string;
+  readonly envelopeParamName: string;
+  readonly [key: string]: any;
+}
+
+export interface Options {
   readonly req: Request;
   readonly res: Response;
-  readonly config: FacadeConfig<I>;
+  readonly config?: Config;
   readonly status: number;
   readonly responseObject?: any;
   readonly headers?: OutgoingHttpHeaders;
 }
 
-export const sendEnvelopedResponse = <I extends Item>({
-  config,
+const defaultConfig = {
+  dataKeyName: 'data',
+  envelopeParamName: 'envelope',
+  prettyParamName: 'pretty',
+};
+
+export const sendEnvelopedResponse = ({
+  config = defaultConfig,
   headers,
   req,
   res,
   responseObject,
   status,
-}: Options<I>) => {
+}: Options) => {
   /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#envelope */
   res.status(OK);
 
@@ -46,14 +57,14 @@ export const sendEnvelopedResponse = <I extends Item>({
   return res.json(JSON.stringify(data, null, 2));
 };
 
-export const sendNormalResponse = <I extends Item>({
-  config,
+export const sendNormalResponse = ({
+  config = defaultConfig,
   headers,
   req,
   res,
   responseObject,
   status,
-}: Options<I>) => {
+}: Options) => {
   res.status(status);
   if (headers !== undefined) {
     _mapObjIndexed((value, key) => {
@@ -66,7 +77,7 @@ export const sendNormalResponse = <I extends Item>({
   if (responseObject === undefined) {
     return res.send();
   }
-  
+
   /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
   if (req.query[config.prettyParamName] === 'false') {
     return res.json(responseObject[config.dataKeyName]);
@@ -75,8 +86,9 @@ export const sendNormalResponse = <I extends Item>({
   return res.json(JSON.stringify(responseObject, null, 2));
 };
 
-const sendResponse = <I extends Item>(options: Options<I>) => boolean(options.req.query[options.config.envelopeParamName])
-    ? sendEnvelopedResponse(options)
-    : sendNormalResponse(options);
+const sendResponse = ({ config = defaultConfig, ...rest }: Options) =>
+  boolean(rest.req.query[config.envelopeParamName])
+    ? sendEnvelopedResponse({ ...rest, config })
+    : sendNormalResponse({ ...rest, config });
 
 export default sendResponse;

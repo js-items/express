@@ -57,21 +57,31 @@ Object {
 `;
 
 exports[`@getItems throws JsonError when sort is invalid 1`] = `
-Object {
-  "data": "invalid_filter",
-  "path": Array [
-    "sort",
+"{
+  \\"data\\": \\"invalid_sort\\",
+  \\"path\\": [
+    \\"filter\\"
   ],
-  "transactionId": "1",
-}
+  \\"transactionId\\": \\"1\\"
+}"
+`;
+
+exports[`@getItems throws JsonError when sort is invalid 2`] = `
+"{
+  \\"data\\": \\"invalid_sort\\",
+  \\"path\\": [
+    \\"sort\\"
+  ],
+  \\"transactionId\\": \\"1\\"
+}"
 `;
 
 exports[`@getItems throws NumberError when limit is invalid 1`] = `
-Object {
-  "data": "not_numeric",
-  "path": Array [
-    "limit",
+"{
+  \\"data\\": \\"not_numeric\\",
+  \\"path\\": [
+    \\"limit\\"
   ],
-  "transactionId": "1",
-}
+  \\"transactionId\\": \\"1\\"
+}"
 `;

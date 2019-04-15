@@ -9,14 +9,21 @@ import {
 import JsonError from '../../errors/JsonError';
 import NumberError from '../../errors/NumberError';
 import ErrorHandler from '../../types/ErrorHandler';
+import sendResponse from '../sendResponse';
 
-const handleError: ErrorHandler = ({ res, err, transactionId }) => {
+const handleError: ErrorHandler = ({ req, res, err, transactionId }) => {
   const sendErrorResponse = (statusCode: number, errorData: object) => {
     const body = {
       ...errorData,
       transactionId,
     };
-    res.status(statusCode).json(body);
+
+    sendResponse({
+      req,
+      res,
+      responseObject: body,
+      status: statusCode,
+    });
   };
 
   if (err instanceof ConflictingItemError) {

@@ -2,15 +2,15 @@
 import * as sourceMapSupport from 'source-map-support';
 sourceMapSupport.install();
 import dotenv from 'dotenv';
-import { BAD_REQUEST, OK } from 'http-status-codes';
+import { BAD_REQUEST } from 'http-status-codes';
 dotenv.config();
 import { Result as GetItemsResult } from '@js-items/foundation/dist/functions/GetItems';
 import { TestItem } from '@js-items/foundation/dist/functions/utils/testItem';
 import { start } from '@js-items/foundation/dist/interfaces/Cursor';
 import { TEST_URL } from '../../constants';
-import createInMemoryService from '../../utils/createInMemoryService';
-import createTestUrl from '../../utils/createTestUrl';
-import initTests from '../../utils/initTests';
+import assertOnGetItems from '../utils/assertOnGetItems';
+import createInMemoryService from '../utils/createInMemoryService';
+import initTests from '../utils/initTests';
 
 jest.mock('uuid', () => ({
   v4: jest.fn(() => '1'),
@@ -37,7 +37,7 @@ describe('@getItems', () => {
     getItems,
   });
 
-  const { request } = initTests<TestItem>({ service });
+  const { request } = initTests({ service });
 
   const filter = { id: { $in: ['1', '2'] } };
   const sort = { id: 'desc' };
@@ -51,76 +51,85 @@ describe('@getItems', () => {
     sort: JSON.stringify(sort),
   };
 
+  const defaultOptions = {
+    client: request,
+    getItems,
+    params: defaultParams,
+    url: TEST_URL,
+  };
+
+  const expectedParams = {
+    filter,
+    pagination: {
+      after,
+      before: undefined,
+      limit: 1,
+    },
+    sort,
+  };
+
   it('gets items', async () => {
-    const url = createTestUrl({ url: TEST_URL, params: defaultParams });
-
-    const { status, body } = await request.get(url).send();
-
-    expect(status).toBe(OK);
-    expect(body).toMatchSnapshot();
-    expect(getItems).toBeCalledWith({
-      filter,
-      pagination: {
-        after,
-        before: undefined,
-        limit: 1,
-      },
-      sort,
+    await assertOnGetItems({
+      ...defaultOptions,
+      expectedParams,
     });
   });
 
   it('gets items when envelope enabled and count query param provided', async () => {
-    const params = {
-      ...defaultParams,
-      count: true,
-      envelope: true,
-    };
-
-    const url = createTestUrl({ url: TEST_URL, params });
-
-    const { status, body } = await request.get(url).send();
-
-    expect(status).toBe(OK);
-    expect(body).toMatchSnapshot();
+    await assertOnGetItems({
+      ...defaultOptions,
+      expectedParams,
+      params: {
+        ...defaultOptions.params,
+        count: true,
+        envelope: true,
+      },
+    });
   });
 
   it('gets items when envelope enabled and pretty response is disabled', async () => {
-    const params = {
-      ...defaultParams,
-      envelope: true,
-      pretty: false,
-    };
-
-    const url = createTestUrl({ url: TEST_URL, params });
-
-    const { status, body } = await request.get(url).send();
-
-    expect(status).toBe(OK);
-    expect(body).toMatchSnapshot();
+    await assertOnGetItems({
+      ...defaultOptions,
+      expectedParams,
+      params: {
+        ...defaultOptions.params,
+        envelope: true,
+        pretty: false,
+      },
+    });
   });
 
   it('throws JsonError when sort is invalid', async () => {
-    const params = {
-      sort: 'invalid_filter',
-    };
-    const url = createTestUrl({ url: TEST_URL, params });
+    await assertOnGetItems({
+      ...defaultOptions,
+      params: {
+        ...defaultOptions.params,
+        filter: 'invalid_sort',
+      },
+      status: BAD_REQUEST,
+    });
+  });
 
-    const { status, body } = await request.get(url).send();
-
-    expect(status).toBe(BAD_REQUEST);
-    expect(body).toMatchSnapshot();
+  it('throws JsonError when sort is invalid', async () => {
+    await assertOnGetItems({
+      ...defaultOptions,
+      params: {
+        ...defaultOptions.params,
+        sort: 'invalid_sort',
+      },
+      status: BAD_REQUEST,
+    });
   });
 
   it('throws NumberError when limit is invalid', async () => {
-    const params = {
-      limit: 'not_numeric',
-    };
-    const url = createTestUrl({ url: TEST_URL, params });
-
-    const { status, body } = await request.get(url).send();
-
-    expect(status).toBe(BAD_REQUEST);
-    expect(body).toMatchSnapshot();
+    await assertOnGetItems({
+      ...defaultOptions,
+      params: {
+        ...defaultOptions.params,
+        limit: 'not_numeric',
+      },
+      status: BAD_REQUEST,
+    });
   });
   // tslint:disable-next-line:max-file-line-count
 });

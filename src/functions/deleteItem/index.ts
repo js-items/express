@@ -16,7 +16,7 @@ const deleteItem: RequestHandlerFactory = <I extends Item>(
 
   await transactionHandler({ req, res }, async () => {
     const filter = getJsonQueryParam(req.query, 'filter');
-
+    
     await config.service.deleteItem({
       filter: config.createFilter({ filter, req, res }),
       id: req.params.id,
