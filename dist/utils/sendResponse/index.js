@@ -48,7 +48,7 @@ exports.sendEnvelopedResponse = function (_a) {
     if (req.query[config.prettyParamName] === 'false') {
         return res.json(data);
     }
-    return res.json(JSON.stringify(data, null, 2));
+    return res.send(JSON.stringify(data, null, 2));
 };
 exports.sendNormalResponse = function (_a) {
     var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, responseObject = _a.responseObject, status = _a.status;
@@ -67,7 +67,7 @@ exports.sendNormalResponse = function (_a) {
     if (req.query[config.prettyParamName] === 'false') {
         return res.json(responseObject[config.dataKeyName]);
     }
-    return res.json(JSON.stringify(responseObject, null, 2));
+    return res.send(JSON.stringify(responseObject, null, 2));
 };
 var sendResponse = function (_a) {
     var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, rest = __rest(_a, ["config"]);

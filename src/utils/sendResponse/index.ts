@@ -54,7 +54,7 @@ export const sendEnvelopedResponse = ({
     return res.json(data);
   }
 
-  return res.json(JSON.stringify(data, null, 2));
+  return res.send(JSON.stringify(data, null, 2));
 };
 
 export const sendNormalResponse = ({
@@ -83,7 +83,7 @@ export const sendNormalResponse = ({
     return res.json(responseObject[config.dataKeyName]);
   }
 
-  return res.json(JSON.stringify(responseObject, null, 2));
+  return res.send(JSON.stringify(responseObject, null, 2));
 };
 
 const sendResponse = ({ config = defaultConfig, ...rest }: Options) =>
