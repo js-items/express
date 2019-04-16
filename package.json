@@ -32,7 +32,7 @@
     "@js-items/foundation": "1.0.24",
     "@kube-js/semantic-release": "1.0.7",
     "@kube-js/tscommons": "1.0.5",
-    "@types/dotenv": "6.1.0",
+    "@types/dotenv": "6.1.1",
     "@types/express": "4.16.1",
     "@types/jest": "24.0.11",
     "@types/node": "11.13.4",
