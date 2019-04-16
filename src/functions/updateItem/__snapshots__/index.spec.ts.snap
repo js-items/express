@@ -1,32 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@updateItem throws not found error when item does exist 1`] = `
-"{
-  \\"itemId\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
-  \\"itemName\\": \\"item\\",
-  \\"transactionId\\": \\"1\\"
-}"
+Object {
+  "itemId": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
+  "itemName": "item",
+  "transactionId": "1",
+}
 `;
 
 exports[`@updateItem throws not found error when item does exist and envelope is enabled 1`] = `
-"{
-  \\"headers\\": {
-    \\"x-powered-by\\": \\"Express\\"
+Object {
+  "headers": Object {
+    "x-powered-by": "Express",
   },
-  \\"response\\": {
-    \\"itemId\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
-    \\"itemName\\": \\"item\\",
-    \\"transactionId\\": \\"1\\"
+  "response": Object {
+    "itemId": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
+    "itemName": "item",
+    "transactionId": "1",
   },
-  \\"status\\": 404
-}"
+  "status": 404,
+}
 `;
 
 exports[`@updateItem updates item 1`] = `
-"{
-  \\"booleanProperty\\": true,
-  \\"id\\": \\"6da9dce6-be40-4fac-bd9c-6a2f348a1c87\\",
-  \\"numberProperty\\": 999,
-  \\"stringProperty\\": \\"testowo\\"
-}"
+Object {
+  "booleanProperty": true,
+  "id": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
+  "numberProperty": 999,
+  "stringProperty": "testowo",
+}
 `;

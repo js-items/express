@@ -22,11 +22,11 @@ var sendResponse_1 = __importDefault(require("../sendResponse"));
 var handleError = function (_a) {
     var req = _a.req, res = _a.res, err = _a.err, transactionId = _a.transactionId;
     var sendErrorResponse = function (statusCode, errorData) {
-        var body = __assign({}, errorData, { transactionId: transactionId });
+        var data = __assign({}, errorData, { transactionId: transactionId });
         sendResponse_1.default({
             req: req,
             res: res,
-            responseObject: body,
+            responseObject: data,
             status: statusCode,
         });
     };

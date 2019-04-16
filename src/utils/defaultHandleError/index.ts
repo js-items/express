@@ -13,15 +13,15 @@ import sendResponse from '../sendResponse';
 
 const handleError: ErrorHandler = ({ req, res, err, transactionId }) => {
   const sendErrorResponse = (statusCode: number, errorData: object) => {
-    const body = {
+    const data = {
       ...errorData,
       transactionId,
     };
-
+    
     sendResponse({
       req,
       res,
-      responseObject: body,
+      responseObject: data,
       status: statusCode,
     });
   };

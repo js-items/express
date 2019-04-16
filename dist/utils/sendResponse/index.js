@@ -48,6 +48,7 @@ exports.sendEnvelopedResponse = function (_a) {
     if (req.query[config.prettyParamName] === 'false') {
         return res.json(data);
     }
+    res.setHeader('Content-Type', 'application/json');
     return res.send(JSON.stringify(data, null, 2));
 };
 exports.sendNormalResponse = function (_a) {
@@ -65,8 +66,9 @@ exports.sendNormalResponse = function (_a) {
     }
     /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
     if (req.query[config.prettyParamName] === 'false') {
-        return res.json(responseObject[config.dataKeyName]);
+        return res.json(responseObject);
     }
+    res.setHeader('Content-Type', 'application/json');
     return res.send(JSON.stringify(responseObject, null, 2));
 };
 var sendResponse = function (_a) {

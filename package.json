@@ -12,6 +12,12 @@
     "test:watch": "jest --watch --coverage",
     "semantic-release": "semantic-release-public-circleci-lib"
   },
+  "pre-commit": [
+    "build",
+    "test",
+    "lint",
+    "duplication"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/js-items/express.git"
@@ -43,9 +49,6 @@
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.3.4000"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "boolean": "^1.0.0",
@@ -56,7 +59,11 @@
     "jscpd": "^2.0.11",
     "jscpd-badge-reporter": "^1.1.3",
     "make-error": "^1.3.5",
+    "pre-commit": "^1.2.2",
     "ramda": "^0.26.1",
     "uuid": "^3.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

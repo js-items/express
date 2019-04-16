@@ -1,38 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@getItems gets items 1`] = `
-"{
-  \\"data\\": [
-    {
-      \\"id\\": \\"1\\"
+Object {
+  "data": Array [
+    Object {
+      "id": "1",
     },
-    {
-      \\"id\\": \\"2\\"
-    }
-  ]
-}"
+    Object {
+      "id": "2",
+    },
+  ],
+}
 `;
 
 exports[`@getItems gets items when envelope enabled and count query param provided 1`] = `
-"{
-  \\"headers\\": {
-    \\"x-powered-by\\": \\"Express\\",
-    \\"x-has-before\\": \\"false\\",
-    \\"x-has-after\\": \\"false\\",
-    \\"x-total-count\\": 1
+Object {
+  "headers": Object {
+    "x-has-after": "false",
+    "x-has-before": "false",
+    "x-powered-by": "Express",
+    "x-total-count": 1,
   },
-  \\"response\\": {
-    \\"data\\": [
-      {
-        \\"id\\": \\"1\\"
+  "response": Object {
+    "data": Array [
+      Object {
+        "id": "1",
       },
-      {
-        \\"id\\": \\"2\\"
-      }
-    ]
+      Object {
+        "id": "2",
+      },
+    ],
   },
-  \\"status\\": 200
-}"
+  "status": 200,
+}
 `;
 
 exports[`@getItems gets items when envelope enabled and pretty response is disabled 1`] = `
@@ -57,31 +57,31 @@ Object {
 `;
 
 exports[`@getItems throws JsonError when sort is invalid 1`] = `
-"{
-  \\"data\\": \\"invalid_sort\\",
-  \\"path\\": [
-    \\"filter\\"
+Object {
+  "data": "invalid_sort",
+  "path": Array [
+    "filter",
   ],
-  \\"transactionId\\": \\"1\\"
-}"
+  "transactionId": "1",
+}
 `;
 
 exports[`@getItems throws JsonError when sort is invalid 2`] = `
-"{
-  \\"data\\": \\"invalid_sort\\",
-  \\"path\\": [
-    \\"sort\\"
+Object {
+  "data": "invalid_sort",
+  "path": Array [
+    "sort",
   ],
-  \\"transactionId\\": \\"1\\"
-}"
+  "transactionId": "1",
+}
 `;
 
 exports[`@getItems throws NumberError when limit is invalid 1`] = `
-"{
-  \\"data\\": \\"not_numeric\\",
-  \\"path\\": [
-    \\"limit\\"
+Object {
+  "data": "not_numeric",
+  "path": Array [
+    "limit",
   ],
-  \\"transactionId\\": \\"1\\"
-}"
+  "transactionId": "1",
+}
 `;

@@ -13,11 +13,11 @@ Object {
 `;
 
 exports[`@deleteItems delete items when envelope is enabled and pretty response is enabled 1`] = `
-"{
-  \\"headers\\": {
-    \\"x-powered-by\\": \\"Express\\"
+Object {
+  "headers": Object {
+    "x-powered-by": "Express",
   },
-  \\"response\\": {},
-  \\"status\\": 204
-}"
+  "response": Object {},
+  "status": 204,
+}
 `;
