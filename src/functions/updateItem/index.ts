@@ -11,7 +11,7 @@ const updateItem: RequestHandlerFactory = <I extends Item>(
   config: FacadeConfig<I>
 ) => async (req: Request, res: Response) => {
   const transactionHandler = _defaultTo(config.defaultTransactionHandler)(
-    config.beforeGetItem
+    config.beforeUpdateItem
   );
 
   await transactionHandler({ req, res }, async () => {
