@@ -49,7 +49,7 @@ var updateItem = function (config) { return function (req, res) { return __await
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                transactionHandler = defaultTo_1.default(config.defaultTransactionHandler)(config.beforeGetItem);
+                transactionHandler = defaultTo_1.default(config.defaultTransactionHandler)(config.beforeUpdateItem);
                 return [4 /*yield*/, transactionHandler({ req: req, res: res }, function () { return __awaiter(_this, void 0, void 0, function () {
                         var filter, item;
                         return __generator(this, function (_a) {
