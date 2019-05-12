@@ -15,12 +15,10 @@ The main differences to the @js-entity-repos/express:
 
 - different naming convention: using `item` instead of `entity`
 - cursor based pagination operates using `before` and `after` instead of `cursor` and `direction`
-- optional `enveloping` response (`GET /endpoint?envelope=true`) for clients not capable of working with headers and JSONP
 - `granular transactions handlers` for each `request handler` - this could be used for i.e. `authentication` or `permissions` checks
 - possibility to `override` each `request handler`
 - ability to disable json body parser middleware if already present in the stack (`enableJsonBodyParser: false`)
 - by default all responses are `pretty` which improves readability, you can disable that by query param (`/endpoint?pretty=false`)
-- dropped support for `/count` endpoint, instead allows client to get number of available items by adding query param (`/endpoint?total=true` for get request, resulting in additional header: `x-total-count` which name is configurable)
 
 ## Installation:
 

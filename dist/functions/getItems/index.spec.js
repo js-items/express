@@ -128,10 +128,10 @@ describe('@getItems', function () {
             }
         });
     }); });
-    it('gets items when envelope enabled and count query param provided', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('gets items when envelope enabled', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, assertOnGetItems_1.default(__assign({}, defaultOptions, { expectedParams: expectedParams, params: __assign({}, defaultOptions.params, { count: true, envelope: true }) }))];
+                case 0: return [4 /*yield*/, assertOnGetItems_1.default(__assign({}, defaultOptions, { expectedParams: expectedParams, params: __assign({}, defaultOptions.params, { envelope: true }) }))];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

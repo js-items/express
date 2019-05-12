@@ -9,10 +9,16 @@ import TransactionHandler from './types/TransactionHandler';
 export default interface FacadeConfig<I extends Item> {
   readonly dataKeyName: string;
   readonly totalHeaderName: string;
-  readonly beforeHeaderName: string;
   readonly hasAfterHeaderName: string;
-  readonly hasBeforeHeaderName: string;
   readonly afterHeaderName: string;
+  readonly hasBeforeHeaderName: string;
+  readonly beforeHeaderName: string;
+  readonly paginationKey: string;
+  readonly afterKey: string;
+  readonly beforeKey: string;
+  readonly hasBeforeKey: string;
+  readonly hasAfterKey: string;
+  readonly totalKey: string;
   readonly envelopeParamName: string;
   readonly prettyParamName: string;
   readonly createFilter: CreateFilter<I>;

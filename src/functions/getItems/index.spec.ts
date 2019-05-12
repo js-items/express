@@ -75,13 +75,12 @@ describe('@getItems', () => {
     });
   });
 
-  it('gets items when envelope enabled and count query param provided', async () => {
+  it('gets items when envelope enabled', async () => {
     await assertOnGetItems<TestItem>({
       ...defaultOptions,
       expectedParams,
       params: {
         ...defaultOptions.params,
-        count: true,
         envelope: true,
       },
     });

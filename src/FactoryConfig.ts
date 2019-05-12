@@ -15,6 +15,12 @@ export default interface FactoryConfig<I extends Item> {
   readonly afterHeaderName?: string;
   readonly hasBeforeHeaderName?: string;
   readonly beforeHeaderName?: string;
+  readonly afterKey?: string;
+  readonly beforeKey?: string;
+  readonly hasBeforeKey?: string;
+  readonly hasAfterKey?: string;
+  readonly totalKey?: string;
+  readonly paginationKey?: string;
   readonly envelopParamName?: string;
   readonly prettyParamName?: string;
   readonly createFilter?: CreateFilter<I>;

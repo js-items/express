@@ -26,6 +26,12 @@ export default <I extends Item>({
   afterHeaderName,
   hasBeforeHeaderName,
   beforeHeaderName,
+  afterKey,
+  beforeKey,
+  hasBeforeKey,
+  hasAfterKey,
+  totalKey,
+  paginationKey,
   envelopParamName,
   prettyParamName,
   dataKeyName,
@@ -42,13 +48,33 @@ export default <I extends Item>({
     hasAfterHeaderName
   );
   const customAfterHeaderName = _defaultTo('x-after-cursor')(afterHeaderName);
+  const customTotalKey = _defaultTo('total_count')(totalKey);
+  const customHasBeforeKey = _defaultTo('has_before')(
+    hasBeforeKey
+  );
+
+  const customBeforeKey = _defaultTo('before')(
+    beforeKey
+  );
+
+  const customHasAfterKey = _defaultTo('has_after')(
+    hasAfterKey
+  );
+
+  const customAfterKey = _defaultTo('after')(
+    afterKey
+  );
+
   const customEnvelopParamName = _defaultTo('envelope')(envelopParamName);
+  const customPaginationKey = _defaultTo('pagination')(paginationKey);
   const customPrettyParamName = _defaultTo('pretty')(prettyParamName);
   const customDataKeyName = _defaultTo('data', dataKeyName);
   
   const facadeConfig: FacadeConfig<I> = {
     afterHeaderName: customAfterHeaderName,
+    afterKey: customAfterKey,
     beforeHeaderName: customBeforeHeaderName,
+    beforeKey: customBeforeKey,
     convertDocumentIntoItem: ({ document }) => document,
     convertItemIntoDocument: ({ item }) => item,
     createFilter: ({ filter }) => filter,
@@ -58,9 +84,13 @@ export default <I extends Item>({
     defaultTransactionHandler,
     envelopeParamName: customEnvelopParamName,
     hasAfterHeaderName: customHasAfterHeaderName,
+    hasAfterKey: customHasAfterKey,
     hasBeforeHeaderName: customHasBeforeHeaderName,
+    hasBeforeKey: customHasBeforeKey,
+    paginationKey: customPaginationKey,
     prettyParamName: customPrettyParamName,
     totalHeaderName: customTotalHeaderName,
+    totalKey: customTotalKey,
     ...config,
   };
 
@@ -88,4 +118,5 @@ export default <I extends Item>({
   router.post('', createItemFactory(facadeConfig));
 
   return router;
+// tslint:disable-next-line:max-file-line-count
 };

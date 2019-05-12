@@ -1,25 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@getItems gets items 1`] = `
-Object {
-  "data": Array [
-    Object {
-      "id": "1",
-    },
-    Object {
-      "id": "2",
-    },
-  ],
-}
+Array [
+  Object {
+    "id": "1",
+  },
+  Object {
+    "id": "2",
+  },
+]
 `;
 
-exports[`@getItems gets items when envelope enabled and count query param provided 1`] = `
+exports[`@getItems gets items when envelope enabled 1`] = `
 Object {
   "headers": Object {
-    "x-has-after": "false",
-    "x-has-before": "false",
     "x-powered-by": "Express",
-    "x-total-count": 1,
   },
   "response": Object {
     "data": Array [
@@ -30,6 +25,11 @@ Object {
         "id": "2",
       },
     ],
+    "pagination": Object {
+      "has_after": false,
+      "has_before": false,
+      "total_count": 1,
+    },
   },
   "status": 200,
 }
@@ -38,8 +38,6 @@ Object {
 exports[`@getItems gets items when envelope enabled and pretty response is disabled 1`] = `
 Object {
   "headers": Object {
-    "x-has-after": "false",
-    "x-has-before": "false",
     "x-powered-by": "Express",
   },
   "response": Object {
@@ -51,6 +49,11 @@ Object {
         "id": "2",
       },
     ],
+    "pagination": Object {
+      "has_after": false,
+      "has_before": false,
+      "total_count": 1,
+    },
   },
   "status": 200,
 }

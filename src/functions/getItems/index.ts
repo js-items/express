@@ -1,4 +1,5 @@
 import { Item } from '@js-items/foundation';
+import boolean from 'boolean';
 import { Request, Response } from 'express';
 import { OutgoingHttpHeaders } from 'http';
 import { OK } from 'http-status-codes';
@@ -18,7 +19,6 @@ const getItems: RequestHandlerFactory = <I extends Item>(
 
   await transactionHandler({ req, res }, async () => {
     const filter = getJsonQueryParam(req.query, 'filter');
-    const count = Boolean(req.query.count);
     const sort = getJsonQueryParam(req.query, 'sort');
     const limit = getNumberQueryParam(
       req.query,
@@ -37,26 +37,37 @@ const getItems: RequestHandlerFactory = <I extends Item>(
       sort,
     });
 
-    const headers: OutgoingHttpHeaders = {
+    const { count: totalCount } = await config.service.countItems({
+      filter: createdFilter,
+    });
+
+    const responseHeaders: OutgoingHttpHeaders = {
       [config.afterHeaderName]: cursor.after,
       [config.beforeHeaderName]: cursor.before,
       [config.hasBeforeHeaderName]: cursor.hasBefore.toString(),
       [config.hasAfterHeaderName]: cursor.hasAfter.toString(),
+      [config.totalHeaderName]: totalCount,
     };
 
-    if (count) {
-      const { count: totalCount } = await config.service.countItems({
-        filter: createdFilter,
-      });
+    const responseData = items.map(item =>
+      config.convertItemIntoDocument({ item, req, res })
+    );
 
-      headers[config.totalHeaderName] = totalCount;
-    }
-
-    const responseObject = {
-      [config.dataKeyName]: items.map(item =>
-        config.convertItemIntoDocument({ item, req, res })
-      ),
+    const nestedObject = {
+      [config.paginationKey]: {
+        [config.afterKey]:  cursor.after,
+        [config.beforeKey]:  cursor.before ,
+        [config.hasBeforeKey]: cursor.hasBefore,
+        [config.hasAfterKey]: cursor.hasAfter,
+        [config.totalKey]: totalCount,
+      },
+      [config.dataKeyName]: responseData,
     };
+
+    const enveloped = boolean(req.query[config.envelopeParamName]);
+
+    const responseObject = enveloped ? nestedObject : responseData;
+    const headers = enveloped ? {} : responseHeaders;
 
     sendResponse({ req, res, config, status: OK, headers, responseObject });
   });
