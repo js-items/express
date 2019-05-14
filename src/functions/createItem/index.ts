@@ -25,6 +25,8 @@ const createItem: RequestHandlerFactory = <I extends Item>(
         res,
       }),
     });
+    
+    req.body.id = id;
 
     sendResponse({
       config,
