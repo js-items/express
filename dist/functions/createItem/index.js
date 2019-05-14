@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -41,21 +52,27 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var http_status_codes_1 = require("http-status-codes");
 var defaultTo_1 = __importDefault(require("ramda/src/defaultTo"));
+var uuid_1 = require("uuid");
 var sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 var createItem = function (config) { return function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var transactionHandler;
+    var transactionHandler, id;
     var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 transactionHandler = defaultTo_1.default(config.defaultTransactionHandler)(config.beforeCreateItem);
+                id = config.serverSideGeneratedIds ? uuid_1.v4() : req.body.id;
                 return [4 /*yield*/, transactionHandler({ req: req, res: res }, function () { return __awaiter(_this, void 0, void 0, function () {
                         var item;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, config.service.createItem({
-                                        id: req.body.id,
-                                        item: config.convertDocumentIntoItem({ document: req.body, req: req, res: res }),
+                                        id: id,
+                                        item: config.convertDocumentIntoItem({
+                                            document: __assign({}, req.body, { id: id }),
+                                            req: req,
+                                            res: res,
+                                        }),
                                     })];
                                 case 1:
                                     item = (_a.sent()).item;

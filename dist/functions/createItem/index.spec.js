@@ -64,7 +64,6 @@ var initTests_1 = __importDefault(require("../utils/initTests"));
 sourceMapSupport.install();
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-var foundation_1 = require("@js-items/foundation");
 var testItem_1 = __importDefault(require("@js-items/foundation/dist/functions/utils/testItem"));
 var http_status_codes_1 = require("http-status-codes");
 var constants_1 = require("../../constants");
@@ -74,15 +73,10 @@ jest.mock('uuid', function () { return ({
 }); });
 var notExistingId = 'not-existing-id';
 var createItem = jest.fn(function (_a) {
-    var item = _a.item, id = _a.id;
-    return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_b) {
-            if (id === testItem_1.default.id) {
-                return [2 /*return*/, Promise.reject(new foundation_1.ConflictingItemError('item', testItem_1.default.id))];
-            }
-            return [2 /*return*/, Promise.resolve({ item: item })];
-        });
-    });
+    var item = _a.item;
+    return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_b) {
+        return [2 /*return*/, Promise.resolve({ item: item })];
+    }); });
 });
 describe('@createItem', function () {
     beforeEach(function () { return __awaiter(_this, void 0, void 0, function () {
@@ -96,8 +90,8 @@ describe('@createItem', function () {
     });
     var request = initTests_1.default({ service: service }).request;
     var expectedParams = {
-        id: testItem_1.default.id,
-        item: testItem_1.default,
+        id: '1',
+        item: __assign({}, testItem_1.default, { id: '1' }),
     };
     var defaultOptions = {
         body: testItem_1.default,
@@ -106,47 +100,12 @@ describe('@createItem', function () {
         expectedParams: expectedParams,
         url: constants_1.TEST_URL,
     };
-    it('throws conflicting error when item does exist', function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, assertOnCreateItem_1.default(__assign({}, defaultOptions, { status: http_status_codes_1.CONFLICT }))];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('throws conflicting error when item does exist and envelope is enabled and pretty is disabled', function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, assertOnCreateItem_1.default(__assign({}, defaultOptions, { params: {
-                            envelope: true,
-                            pretty: false,
-                        }, status: http_status_codes_1.OK }))];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('throws conflicting error when item does exist and envelope is enabled and pretty is enabled', function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, assertOnCreateItem_1.default(__assign({}, defaultOptions, { params: {
-                            envelope: true,
-                        }, status: http_status_codes_1.OK }))];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
     it('creates item', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, assertOnCreateItem_1.default(__assign({}, defaultOptions, { body: __assign({}, testItem_1.default, { id: notExistingId }), expectedParams: {
-                            id: notExistingId,
-                            item: __assign({}, testItem_1.default, { id: notExistingId }),
+                case 0: return [4 /*yield*/, assertOnCreateItem_1.default(__assign({}, defaultOptions, { body: __assign({}, testItem_1.default), expectedParams: {
+                            id: '1',
+                            item: __assign({}, testItem_1.default, { id: '1' }),
                         } }))];
                 case 1:
                     _a.sent();
@@ -158,8 +117,8 @@ describe('@createItem', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, assertOnCreateItem_1.default(__assign({}, defaultOptions, { body: __assign({}, testItem_1.default, { id: notExistingId }), expectedParams: {
-                            id: notExistingId,
-                            item: __assign({}, testItem_1.default, { id: notExistingId }),
+                            id: '1',
+                            item: __assign({}, testItem_1.default, { id: '1' }),
                         }, params: {
                             envelope: true,
                         }, status: http_status_codes_1.OK }))];

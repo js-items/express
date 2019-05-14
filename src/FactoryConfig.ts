@@ -10,6 +10,7 @@ import TransactionHandler from './types/TransactionHandler';
 export default interface FactoryConfig<I extends Item> {
   readonly dataKeyName?: string;
   readonly enableJsonBodyParser?: boolean;
+  readonly serverSideGeneratedIds?: boolean;
   readonly totalHeaderName?: string;
   readonly hasAfterHeaderName?: string;
   readonly afterHeaderName?: string;

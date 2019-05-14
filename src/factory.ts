@@ -35,6 +35,7 @@ export default <I extends Item>({
   envelopParamName,
   prettyParamName,
   dataKeyName,
+  serverSideGeneratedIds,
   ...config
 }: FactoryConfig<I>): Router => {
   const customTotalHeaderName = _defaultTo('x-total-count')(totalHeaderName);
@@ -51,6 +52,10 @@ export default <I extends Item>({
   const customTotalKey = _defaultTo('total_count')(totalKey);
   const customHasBeforeKey = _defaultTo('has_before')(
     hasBeforeKey
+  );
+
+  const customServerSideGeneratedIds = _defaultTo(true)(
+    serverSideGeneratedIds
   );
 
   const customBeforeKey = _defaultTo('before')(
@@ -89,6 +94,7 @@ export default <I extends Item>({
     hasBeforeKey: customHasBeforeKey,
     paginationKey: customPaginationKey,
     prettyParamName: customPrettyParamName,
+    serverSideGeneratedIds: customServerSideGeneratedIds,
     totalHeaderName: customTotalHeaderName,
     totalKey: customTotalKey,
     ...config,

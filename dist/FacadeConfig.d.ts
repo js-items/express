@@ -7,6 +7,7 @@ import ItemIntoDocument from './types/ItemIntoDocument';
 import TransactionHandler from './types/TransactionHandler';
 export default interface FacadeConfig<I extends Item> {
     readonly dataKeyName: string;
+    readonly serverSideGeneratedIds?: boolean;
     readonly totalHeaderName: string;
     readonly hasAfterHeaderName: string;
     readonly afterHeaderName: string;
