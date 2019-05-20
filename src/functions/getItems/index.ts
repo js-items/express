@@ -30,6 +30,7 @@ const getItems: RequestHandlerFactory = <I extends Item>(
       'limit',
       config.defaultPaginationLimit
     );
+    
     const createdFilter = config.createFilter({ filter, req, res });
 
     const { cursor, items } = await config.service.getItems({
