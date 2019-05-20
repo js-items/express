@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { OutgoingHttpHeaders } from 'http';
 import { OK } from 'http-status-codes';
 import _defaultTo from 'ramda/src/defaultTo';
+import _isNil from 'ramda/src/isNil';
 import FacadeConfig from '../../FacadeConfig';
 import RequestHandlerFactory from '../../types/RequestHandlerFactory';
 import getJsonQueryParam from '../../utils/getJsonQueryParam';
@@ -19,7 +20,11 @@ const getItems: RequestHandlerFactory = <I extends Item>(
 
   await transactionHandler({ req, res }, async () => {
     const filter = getJsonQueryParam(req.query, 'filter');
-    const sort = getJsonQueryParam(req.query, 'sort');
+
+    const sort = !_isNil(req.query.sort)
+      ? getJsonQueryParam(req.query, 'sort')
+      : config.defaultSort;
+      
     const limit = getNumberQueryParam(
       req.query,
       'limit',
@@ -55,8 +60,8 @@ const getItems: RequestHandlerFactory = <I extends Item>(
 
     const nestedObject = {
       [config.paginationKey]: {
-        [config.afterKey]:  cursor.after,
-        [config.beforeKey]:  cursor.before ,
+        [config.afterKey]: cursor.after,
+        [config.beforeKey]: cursor.before,
         [config.hasBeforeKey]: cursor.hasBefore,
         [config.hasAfterKey]: cursor.hasAfter,
         [config.totalKey]: totalCount,

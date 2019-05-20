@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var boolean_1 = __importDefault(require("boolean"));
 var http_status_codes_1 = require("http-status-codes");
 var defaultTo_1 = __importDefault(require("ramda/src/defaultTo"));
+var isNil_1 = __importDefault(require("ramda/src/isNil"));
 var getJsonQueryParam_1 = __importDefault(require("../../utils/getJsonQueryParam"));
 var getNumberQueryParam_1 = __importDefault(require("../../utils/getNumberQueryParam"));
 var sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
@@ -58,7 +59,9 @@ var getItems = function (config) { return function (req, res) { return __awaiter
                             switch (_e.label) {
                                 case 0:
                                     filter = getJsonQueryParam_1.default(req.query, 'filter');
-                                    sort = getJsonQueryParam_1.default(req.query, 'sort');
+                                    sort = !isNil_1.default(req.query.sort)
+                                        ? getJsonQueryParam_1.default(req.query, 'sort')
+                                        : config.defaultSort;
                                     limit = getNumberQueryParam_1.default(req.query, 'limit', config.defaultPaginationLimit);
                                     createdFilter = config.createFilter({ filter: filter, req: req, res: res });
                                     return [4 /*yield*/, config.service.getItems({

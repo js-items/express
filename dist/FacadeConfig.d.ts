@@ -1,4 +1,4 @@
-import { Item } from '@js-items/foundation';
+import { Item, Sort } from '@js-items/foundation';
 import Facade from '@js-items/foundation/dist/Facade';
 import CreateFilter from './types/CreateFilter';
 import CreatePatch from './types/CreatePatch';
@@ -34,5 +34,6 @@ export default interface FacadeConfig<I extends Item> {
     readonly beforeDeleteItems?: TransactionHandler;
     readonly defaultTransactionHandler: TransactionHandler;
     readonly defaultPaginationLimit: number;
+    readonly defaultSort: Sort<I>;
     readonly service: Facade<I>;
 }
