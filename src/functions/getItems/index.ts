@@ -23,14 +23,14 @@ const getItems: RequestHandlerFactory = <I extends Item>(
 
     const sort = !_isNil(req.query.sort)
       ? getJsonQueryParam(req.query, 'sort')
-      : config.defaultSort;
-      
+      : /* istanbul ignore next */ config.defaultSort;
+
     const limit = getNumberQueryParam(
       req.query,
       'limit',
       config.defaultPaginationLimit
     );
-    
+
     const createdFilter = config.createFilter({ filter, req, res });
 
     const { cursor, items } = await config.service.getItems({
