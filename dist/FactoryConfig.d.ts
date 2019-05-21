@@ -1,4 +1,4 @@
-import { Item } from '@js-items/foundation';
+import { Item, Sort } from '@js-items/foundation';
 import Facade from '@js-items/foundation/dist/Facade';
 import CreateFilter from './types/CreateFilter';
 import CreatePatch from './types/CreatePatch';
@@ -8,6 +8,7 @@ import RequestHandlerFactory from './types/RequestHandlerFactory';
 import TransactionHandler from './types/TransactionHandler';
 export default interface FactoryConfig<I extends Item> {
     readonly dataKeyName?: string;
+    readonly defaultSort?: Sort<I>;
     readonly enableJsonBodyParser?: boolean;
     readonly serverSideGeneratedIds?: boolean;
     readonly totalHeaderName?: string;

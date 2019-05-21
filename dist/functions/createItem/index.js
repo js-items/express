@@ -76,6 +76,7 @@ var createItem = function (config) { return function (req, res) { return __await
                                     })];
                                 case 1:
                                     item = (_a.sent()).item;
+                                    req.body.id = id;
                                     sendResponse_1.default({
                                         config: config,
                                         req: req,

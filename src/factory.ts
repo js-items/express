@@ -1,4 +1,4 @@
-import { Item } from '@js-items/foundation';
+import { Item, Sort } from '@js-items/foundation';
 import { json } from 'body-parser';
 import { Router } from 'express';
 import _defaultTo from 'ramda/src/defaultTo';
@@ -23,6 +23,7 @@ export default <I extends Item>({
   createItem,
   totalHeaderName,
   hasAfterHeaderName,
+  defaultSort,
   afterHeaderName,
   hasBeforeHeaderName,
   beforeHeaderName,
@@ -38,6 +39,7 @@ export default <I extends Item>({
   serverSideGeneratedIds,
   ...config
 }: FactoryConfig<I>): Router => {
+  const customDefaultSort = _defaultTo({ id: 'desc' })(defaultSort) as Sort<I>;
   const customTotalHeaderName = _defaultTo('x-total-count')(totalHeaderName);
   const customHasBeforeHeaderName = _defaultTo('x-has-before')(
     hasBeforeHeaderName
@@ -50,31 +52,21 @@ export default <I extends Item>({
   );
   const customAfterHeaderName = _defaultTo('x-after-cursor')(afterHeaderName);
   const customTotalKey = _defaultTo('total_count')(totalKey);
-  const customHasBeforeKey = _defaultTo('has_before')(
-    hasBeforeKey
-  );
+  const customHasBeforeKey = _defaultTo('has_before')(hasBeforeKey);
 
-  const customServerSideGeneratedIds = _defaultTo(true)(
-    serverSideGeneratedIds
-  );
+  const customServerSideGeneratedIds = _defaultTo(true)(serverSideGeneratedIds);
 
-  const customBeforeKey = _defaultTo('before')(
-    beforeKey
-  );
+  const customBeforeKey = _defaultTo('before')(beforeKey);
 
-  const customHasAfterKey = _defaultTo('has_after')(
-    hasAfterKey
-  );
+  const customHasAfterKey = _defaultTo('has_after')(hasAfterKey);
 
-  const customAfterKey = _defaultTo('after')(
-    afterKey
-  );
+  const customAfterKey = _defaultTo('after')(afterKey);
 
   const customEnvelopParamName = _defaultTo('envelope')(envelopParamName);
   const customPaginationKey = _defaultTo('pagination')(paginationKey);
   const customPrettyParamName = _defaultTo('pretty')(prettyParamName);
   const customDataKeyName = _defaultTo('data', dataKeyName);
-  
+
   const facadeConfig: FacadeConfig<I> = {
     afterHeaderName: customAfterHeaderName,
     afterKey: customAfterKey,
@@ -86,6 +78,7 @@ export default <I extends Item>({
     createPatch: ({ document }) => document,
     dataKeyName: customDataKeyName,
     defaultPaginationLimit: 10,
+    defaultSort: customDefaultSort,
     defaultTransactionHandler,
     envelopeParamName: customEnvelopParamName,
     hasAfterHeaderName: customHasAfterHeaderName,
@@ -124,5 +117,5 @@ export default <I extends Item>({
   router.post('', createItemFactory(facadeConfig));
 
   return router;
-// tslint:disable-next-line:max-file-line-count
+  // tslint:disable-next-line:max-file-line-count
 };
