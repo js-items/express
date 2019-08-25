@@ -43,9 +43,15 @@ const getItems: RequestHandlerFactory = <I extends Item>(
       sort,
     });
 
-    const { count: totalCount } = await config.service.countItems({
-      filter: createdFilter,
-    });
+    let totalCount;
+
+    if (config.service.countItems !== undefined) {
+      const { count } = await config.service.countItems({
+        filter: createdFilter,
+      });
+
+      totalCount = count;
+    }
 
     const responseHeaders: OutgoingHttpHeaders = {
       [config.afterHeaderName]: cursor.after,
