@@ -54,14 +54,14 @@ var getItems = function (config) { return function (req, res) { return __awaiter
             case 0:
                 transactionHandler = defaultTo_1.default(config.defaultTransactionHandler)(config.beforeGetItems);
                 return [4 /*yield*/, transactionHandler({ req: req, res: res }, function () { return __awaiter(_this, void 0, void 0, function () {
-                        var _a, _b, _c, filter, sort, limit, createdFilter, _d, cursor, items, totalCount, responseHeaders, responseData, nestedObject, enveloped, responseObject, headers;
+                        var _a, _b, _c, filter, sort, limit, createdFilter, _d, cursor, items, totalCount, count, responseHeaders, responseData, nestedObject, enveloped, responseObject, headers;
                         return __generator(this, function (_e) {
                             switch (_e.label) {
                                 case 0:
                                     filter = getJsonQueryParam_1.default(req.query, 'filter');
                                     sort = !isNil_1.default(req.query.sort)
                                         ? getJsonQueryParam_1.default(req.query, 'sort')
-                                        : config.defaultSort;
+                                        : /* istanbul ignore next */ config.defaultSort;
                                     limit = getNumberQueryParam_1.default(req.query, 'limit', config.defaultPaginationLimit);
                                     createdFilter = config.createFilter({ filter: filter, req: req, res: res });
                                     return [4 /*yield*/, config.service.getItems({
@@ -75,11 +75,15 @@ var getItems = function (config) { return function (req, res) { return __awaiter
                                         })];
                                 case 1:
                                     _d = _e.sent(), cursor = _d.cursor, items = _d.items;
+                                    if (!(config.service.countItems !== undefined)) return [3 /*break*/, 3];
                                     return [4 /*yield*/, config.service.countItems({
                                             filter: createdFilter,
                                         })];
                                 case 2:
-                                    totalCount = (_e.sent()).count;
+                                    count = (_e.sent()).count;
+                                    totalCount = count;
+                                    _e.label = 3;
+                                case 3:
                                     responseHeaders = (_a = {},
                                         _a[config.afterHeaderName] = cursor.after,
                                         _a[config.beforeHeaderName] = cursor.before,
