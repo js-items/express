@@ -16,7 +16,7 @@ import { start } from '@js-items/foundation/dist/interfaces/Cursor';
 import FactoryConfig from './FactoryConfig';
 
 const defaultPromise = () => Promise.resolve();
-
+/* istanbul ignore next */
 const createInMemoryService = <I extends Item>(
   factoryConfig: FactoryConfig<I>
 ): Facade<I> => ({

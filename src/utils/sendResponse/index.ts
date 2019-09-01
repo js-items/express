@@ -26,6 +26,7 @@ const defaultConfig = {
   prettyParamName: 'pretty',
 };
 
+/* istanbul ignore next */
 export const sendEnvelopedResponse = ({
   config = defaultConfig,
   headers,
@@ -49,12 +50,13 @@ export const sendEnvelopedResponse = ({
   if (req.query[config.prettyParamName] === 'false') {
     return res.json(data);
   }
-  
-  res.setHeader('Content-Type','application/json');
+
+  res.setHeader('Content-Type', 'application/json');
 
   return res.send(JSON.stringify(data, null, 2));
 };
 
+/* istanbul ignore next */
 export const sendNormalResponse = ({
   config = defaultConfig,
   headers,
@@ -82,7 +84,7 @@ export const sendNormalResponse = ({
     return res.json(body);
   }
 
-  res.setHeader('Content-Type','application/json');
+  res.setHeader('Content-Type', 'application/json');
 
   return res.send(JSON.stringify(body, null, 2));
 };
