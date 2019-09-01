@@ -29,19 +29,17 @@ var boolean_1 = __importDefault(require("boolean"));
 var http_status_codes_1 = require("http-status-codes");
 var mapObjIndexed_1 = __importDefault(require("ramda/src/mapObjIndexed"));
 var defaultConfig = {
-    dataKeyName: 'data',
     envelopeParamName: 'envelope',
     prettyParamName: 'pretty',
 };
 exports.sendEnvelopedResponse = function (_a) {
-    var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, responseObject = _a.responseObject, status = _a.status;
+    var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, _c = _a.body, body = _c === void 0 ? {} : _c, _d = _a.status, status = _d === void 0 ? http_status_codes_1.OK : _d;
     /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#envelope */
     res.status(http_status_codes_1.OK);
     var combinedHeaders = __assign({}, res.getHeaders(), headers);
-    var response = responseObject !== undefined ? responseObject : {};
     var data = {
+        body: body,
         headers: combinedHeaders,
-        response: response,
         status: status,
     };
     /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
@@ -52,7 +50,7 @@ exports.sendEnvelopedResponse = function (_a) {
     return res.send(JSON.stringify(data, null, 2));
 };
 exports.sendNormalResponse = function (_a) {
-    var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, responseObject = _a.responseObject, status = _a.status;
+    var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, body = _a.body, _c = _a.status, status = _c === void 0 ? http_status_codes_1.OK : _c;
     res.status(status);
     if (headers !== undefined) {
         mapObjIndexed_1.default(function (value, key) {
@@ -61,15 +59,15 @@ exports.sendNormalResponse = function (_a) {
             }
         }, headers);
     }
-    if (responseObject === undefined) {
+    if (body === undefined) {
         return res.send();
     }
     /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
     if (req.query[config.prettyParamName] === 'false') {
-        return res.json(responseObject);
+        return res.json(body);
     }
     res.setHeader('Content-Type', 'application/json');
-    return res.send(JSON.stringify(responseObject, null, 2));
+    return res.send(JSON.stringify(body, null, 2));
 };
 var sendResponse = function (_a) {
     var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, rest = __rest(_a, ["config"]);

@@ -29,10 +29,10 @@ const createItem: RequestHandlerFactory = <I extends Item>(
     req.body.id = id;
 
     sendResponse({
+      body: config.convertItemIntoDocument({ item, req, res }),
       config,
       req,
       res,
-      responseObject: config.convertItemIntoDocument({ item, req, res }),
       status: CREATED,
     });
   });

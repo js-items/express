@@ -8,21 +8,9 @@ import RequestHandlerFactory from './types/RequestHandlerFactory';
 import TransactionHandler from './types/TransactionHandler';
 
 export default interface FactoryConfig<I extends Item> {
-  readonly dataKeyName?: string;
   readonly defaultSort?: Sort<I>;
   readonly enableJsonBodyParser?: boolean;
   readonly serverSideGeneratedIds?: boolean;
-  readonly totalHeaderName?: string;
-  readonly hasAfterHeaderName?: string;
-  readonly afterHeaderName?: string;
-  readonly hasBeforeHeaderName?: string;
-  readonly beforeHeaderName?: string;
-  readonly afterKey?: string;
-  readonly beforeKey?: string;
-  readonly hasBeforeKey?: string;
-  readonly hasAfterKey?: string;
-  readonly totalKey?: string;
-  readonly paginationKey?: string;
   readonly envelopParamName?: string;
   readonly prettyParamName?: string;
   readonly createFilter?: CreateFilter<I>;

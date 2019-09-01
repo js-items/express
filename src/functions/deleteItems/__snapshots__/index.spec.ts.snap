@@ -4,20 +4,20 @@ exports[`@deleteItems delete items 1`] = `Object {}`;
 
 exports[`@deleteItems delete items when envelope is enabled and pretty response is disabled 1`] = `
 Object {
+  "body": Object {},
   "headers": Object {
     "x-powered-by": "Express",
   },
-  "response": Object {},
   "status": 204,
 }
 `;
 
 exports[`@deleteItems delete items when envelope is enabled and pretty response is enabled 1`] = `
 Object {
+  "body": Object {},
   "headers": Object {
     "x-powered-by": "Express",
   },
-  "response": Object {},
   "status": 204,
 }
 `;

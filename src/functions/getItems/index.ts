@@ -1,8 +1,5 @@
 import { Item } from '@js-items/foundation';
-import boolean from 'boolean';
 import { Request, Response } from 'express';
-import { OutgoingHttpHeaders } from 'http';
-import { OK } from 'http-status-codes';
 import _defaultTo from 'ramda/src/defaultTo';
 import _isNil from 'ramda/src/isNil';
 import FacadeConfig from '../../FacadeConfig';
@@ -53,35 +50,22 @@ const getItems: RequestHandlerFactory = <I extends Item>(
       totalCount = count;
     }
 
-    const responseHeaders: OutgoingHttpHeaders = {
-      [config.afterHeaderName]: cursor.after,
-      [config.beforeHeaderName]: cursor.before,
-      [config.hasBeforeHeaderName]: cursor.hasBefore.toString(),
-      [config.hasAfterHeaderName]: cursor.hasAfter.toString(),
-      [config.totalHeaderName]: totalCount,
-    };
-
-    const responseData = items.map(item =>
+    const data: I[] = items.map(item =>
       config.convertItemIntoDocument({ item, req, res })
     );
 
-    const nestedObject = {
-      [config.paginationKey]: {
-        [config.afterKey]: cursor.after,
-        [config.beforeKey]: cursor.before,
-        [config.hasBeforeKey]: cursor.hasBefore,
-        [config.hasAfterKey]: cursor.hasAfter,
-        [config.totalKey]: totalCount,
+    const body = {
+      data,
+      pagination: {
+        after: _defaultTo(null)(cursor.after),
+        before: _defaultTo(null)(cursor.before),
+        hasAfter: cursor.hasAfter,
+        hasBefore: cursor.hasBefore,
+        totalCount: totalCount !== undefined ? totalCount : 0,
       },
-      [config.dataKeyName]: responseData,
     };
 
-    const enveloped = boolean(req.query[config.envelopeParamName]);
-
-    const responseObject = enveloped ? nestedObject : responseData;
-    const headers = enveloped ? {} : responseHeaders;
-
-    sendResponse({ req, res, config, status: OK, headers, responseObject });
+    sendResponse({ req, res, config, body });
   });
 };
 
