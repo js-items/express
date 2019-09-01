@@ -92,7 +92,7 @@ var getItems = function (config) { return function (req, res) { return __awaiter
                                             before: defaultTo_1.default(null)(cursor.before),
                                             hasAfter: cursor.hasAfter,
                                             hasBefore: cursor.hasBefore,
-                                            totalCount: totalCount || 0,
+                                            totalCount: totalCount !== undefined ? totalCount : 0,
                                         },
                                     };
                                     sendResponse_1.default({ req: req, res: res, config: config, body: body });
