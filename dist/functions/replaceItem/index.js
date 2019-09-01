@@ -39,7 +39,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_status_codes_1 = require("http-status-codes");
 var defaultTo_1 = __importDefault(require("ramda/src/defaultTo"));
 var getJsonQueryParam_1 = __importDefault(require("../../utils/getJsonQueryParam"));
 var sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
@@ -64,11 +63,10 @@ var replaceItem = function (config) { return function (req, res) { return __awai
                                 case 1:
                                     result = _a.sent();
                                     sendResponse_1.default({
+                                        body: config.convertItemIntoDocument({ item: result.item, req: req, res: res }),
                                         config: config,
                                         req: req,
                                         res: res,
-                                        responseObject: config.convertItemIntoDocument({ item: result.item, req: req, res: res }),
-                                        status: http_status_codes_1.OK,
                                     });
                                     return [2 /*return*/];
                             }

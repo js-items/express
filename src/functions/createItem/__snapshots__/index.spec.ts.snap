@@ -11,14 +11,14 @@ Object {
 
 exports[`@createItem creates item when envelope is enabled 1`] = `
 Object {
-  "headers": Object {
-    "x-powered-by": "Express",
-  },
-  "response": Object {
+  "body": Object {
     "booleanProperty": false,
     "id": "1",
     "numberProperty": 1,
     "stringProperty": "foo",
+  },
+  "headers": Object {
+    "x-powered-by": "Express",
   },
   "status": 201,
 }

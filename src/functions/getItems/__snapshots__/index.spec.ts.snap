@@ -1,22 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@getItems gets items 1`] = `
-Array [
-  Object {
-    "id": "1",
+Object {
+  "data": Array [
+    Object {
+      "id": "1",
+    },
+    Object {
+      "id": "2",
+    },
+  ],
+  "pagination": Object {
+    "after": null,
+    "before": null,
+    "hasAfter": false,
+    "hasBefore": false,
+    "totalCount": 1,
   },
-  Object {
-    "id": "2",
-  },
-]
+}
 `;
 
 exports[`@getItems gets items when envelope enabled 1`] = `
 Object {
-  "headers": Object {
-    "x-powered-by": "Express",
-  },
-  "response": Object {
+  "body": Object {
     "data": Array [
       Object {
         "id": "1",
@@ -26,10 +32,15 @@ Object {
       },
     ],
     "pagination": Object {
-      "has_after": false,
-      "has_before": false,
-      "total_count": 1,
+      "after": null,
+      "before": null,
+      "hasAfter": false,
+      "hasBefore": false,
+      "totalCount": 1,
     },
+  },
+  "headers": Object {
+    "x-powered-by": "Express",
   },
   "status": 200,
 }
@@ -37,10 +48,7 @@ Object {
 
 exports[`@getItems gets items when envelope enabled and pretty response is disabled 1`] = `
 Object {
-  "headers": Object {
-    "x-powered-by": "Express",
-  },
-  "response": Object {
+  "body": Object {
     "data": Array [
       Object {
         "id": "1",
@@ -50,10 +58,15 @@ Object {
       },
     ],
     "pagination": Object {
-      "has_after": false,
-      "has_before": false,
-      "total_count": 1,
+      "after": null,
+      "before": null,
+      "hasAfter": false,
+      "hasBefore": false,
+      "totalCount": 1,
     },
+  },
+  "headers": Object {
+    "x-powered-by": "Express",
   },
   "status": 200,
 }

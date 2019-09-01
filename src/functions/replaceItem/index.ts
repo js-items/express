@@ -1,6 +1,5 @@
 import { Item } from '@js-items/foundation';
 import { Request, Response } from 'express';
-import { OK } from 'http-status-codes';
 import _defaultTo from 'ramda/src/defaultTo';
 import FacadeConfig from '../../FacadeConfig';
 import RequestHandlerFactory from '../../types/RequestHandlerFactory';
@@ -23,11 +22,10 @@ const replaceItem: RequestHandlerFactory =  <I extends Item>(config: FacadeConfi
     });
 
     sendResponse({
+      body: config.convertItemIntoDocument({ item: result.item, req, res }),
       config,
       req,
       res,
-      responseObject: config.convertItemIntoDocument({ item: result.item, req, res }),
-      status: OK,
     });
   });
 };

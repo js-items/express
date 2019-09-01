@@ -24,9 +24,9 @@ var handleError = function (_a) {
     var sendErrorResponse = function (statusCode, errorData) {
         var data = __assign({}, errorData, { transactionId: transactionId });
         sendResponse_1.default({
+            body: data,
             req: req,
             res: res,
-            responseObject: data,
             status: statusCode,
         });
     };

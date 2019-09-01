@@ -35,24 +35,12 @@ var replaceItem_1 = __importDefault(require("./functions/replaceItem"));
 var updateItem_1 = __importDefault(require("./functions/updateItem"));
 var defaultTransactionHandler_1 = __importDefault(require("./utils/defaultTransactionHandler"));
 exports.default = (function (_a) {
-    var deleteItem = _a.deleteItem, deleteItems = _a.deleteItems, getItem = _a.getItem, getItems = _a.getItems, updateItem = _a.updateItem, replaceItem = _a.replaceItem, createItem = _a.createItem, totalHeaderName = _a.totalHeaderName, hasAfterHeaderName = _a.hasAfterHeaderName, defaultSort = _a.defaultSort, afterHeaderName = _a.afterHeaderName, hasBeforeHeaderName = _a.hasBeforeHeaderName, beforeHeaderName = _a.beforeHeaderName, afterKey = _a.afterKey, beforeKey = _a.beforeKey, hasBeforeKey = _a.hasBeforeKey, hasAfterKey = _a.hasAfterKey, totalKey = _a.totalKey, paginationKey = _a.paginationKey, envelopParamName = _a.envelopParamName, prettyParamName = _a.prettyParamName, dataKeyName = _a.dataKeyName, serverSideGeneratedIds = _a.serverSideGeneratedIds, config = __rest(_a, ["deleteItem", "deleteItems", "getItem", "getItems", "updateItem", "replaceItem", "createItem", "totalHeaderName", "hasAfterHeaderName", "defaultSort", "afterHeaderName", "hasBeforeHeaderName", "beforeHeaderName", "afterKey", "beforeKey", "hasBeforeKey", "hasAfterKey", "totalKey", "paginationKey", "envelopParamName", "prettyParamName", "dataKeyName", "serverSideGeneratedIds"]);
+    var deleteItem = _a.deleteItem, deleteItems = _a.deleteItems, getItem = _a.getItem, getItems = _a.getItems, updateItem = _a.updateItem, replaceItem = _a.replaceItem, createItem = _a.createItem, defaultSort = _a.defaultSort, envelopParamName = _a.envelopParamName, prettyParamName = _a.prettyParamName, serverSideGeneratedIds = _a.serverSideGeneratedIds, config = __rest(_a, ["deleteItem", "deleteItems", "getItem", "getItems", "updateItem", "replaceItem", "createItem", "defaultSort", "envelopParamName", "prettyParamName", "serverSideGeneratedIds"]);
     var customDefaultSort = defaultTo_1.default({ id: 'desc' })(defaultSort);
-    var customTotalHeaderName = defaultTo_1.default('x-total-count')(totalHeaderName);
-    var customHasBeforeHeaderName = defaultTo_1.default('x-has-before')(hasBeforeHeaderName);
-    var customBeforeHeaderName = defaultTo_1.default('x-before-cursor')(beforeHeaderName);
-    var customHasAfterHeaderName = defaultTo_1.default('x-has-after')(hasAfterHeaderName);
-    var customAfterHeaderName = defaultTo_1.default('x-after-cursor')(afterHeaderName);
-    var customTotalKey = defaultTo_1.default('total_count')(totalKey);
-    var customHasBeforeKey = defaultTo_1.default('has_before')(hasBeforeKey);
     var customServerSideGeneratedIds = defaultTo_1.default(true)(serverSideGeneratedIds);
-    var customBeforeKey = defaultTo_1.default('before')(beforeKey);
-    var customHasAfterKey = defaultTo_1.default('has_after')(hasAfterKey);
-    var customAfterKey = defaultTo_1.default('after')(afterKey);
     var customEnvelopParamName = defaultTo_1.default('envelope')(envelopParamName);
-    var customPaginationKey = defaultTo_1.default('pagination')(paginationKey);
     var customPrettyParamName = defaultTo_1.default('pretty')(prettyParamName);
-    var customDataKeyName = defaultTo_1.default('data', dataKeyName);
-    var facadeConfig = __assign({ afterHeaderName: customAfterHeaderName, afterKey: customAfterKey, beforeHeaderName: customBeforeHeaderName, beforeKey: customBeforeKey, convertDocumentIntoItem: function (_a) {
+    var facadeConfig = __assign({ convertDocumentIntoItem: function (_a) {
             var document = _a.document;
             return document;
         }, convertItemIntoDocument: function (_a) {
@@ -64,7 +52,7 @@ exports.default = (function (_a) {
         }, createPatch: function (_a) {
             var document = _a.document;
             return document;
-        }, dataKeyName: customDataKeyName, defaultPaginationLimit: 10, defaultSort: customDefaultSort, defaultTransactionHandler: defaultTransactionHandler_1.default, envelopeParamName: customEnvelopParamName, hasAfterHeaderName: customHasAfterHeaderName, hasAfterKey: customHasAfterKey, hasBeforeHeaderName: customHasBeforeHeaderName, hasBeforeKey: customHasBeforeKey, paginationKey: customPaginationKey, prettyParamName: customPrettyParamName, serverSideGeneratedIds: customServerSideGeneratedIds, totalHeaderName: customTotalHeaderName, totalKey: customTotalKey }, config);
+        }, defaultPaginationLimit: 10, defaultSort: customDefaultSort, defaultTransactionHandler: defaultTransactionHandler_1.default, envelopeParamName: customEnvelopParamName, prettyParamName: customPrettyParamName, serverSideGeneratedIds: customServerSideGeneratedIds }, config);
     var router = express_1.Router();
     var bodyParserEnabled = defaultTo_1.default(true)(config.enableJsonBodyParser);
     if (bodyParserEnabled) {

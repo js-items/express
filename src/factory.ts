@@ -21,75 +21,30 @@ export default <I extends Item>({
   updateItem,
   replaceItem,
   createItem,
-  totalHeaderName,
-  hasAfterHeaderName,
   defaultSort,
-  afterHeaderName,
-  hasBeforeHeaderName,
-  beforeHeaderName,
-  afterKey,
-  beforeKey,
-  hasBeforeKey,
-  hasAfterKey,
-  totalKey,
-  paginationKey,
   envelopParamName,
   prettyParamName,
-  dataKeyName,
   serverSideGeneratedIds,
   ...config
 }: FactoryConfig<I>): Router => {
   const customDefaultSort = _defaultTo({ id: 'desc' })(defaultSort) as Sort<I>;
-  const customTotalHeaderName = _defaultTo('x-total-count')(totalHeaderName);
-  const customHasBeforeHeaderName = _defaultTo('x-has-before')(
-    hasBeforeHeaderName
-  );
-  const customBeforeHeaderName = _defaultTo('x-before-cursor')(
-    beforeHeaderName
-  );
-  const customHasAfterHeaderName = _defaultTo('x-has-after')(
-    hasAfterHeaderName
-  );
-  const customAfterHeaderName = _defaultTo('x-after-cursor')(afterHeaderName);
-  const customTotalKey = _defaultTo('total_count')(totalKey);
-  const customHasBeforeKey = _defaultTo('has_before')(hasBeforeKey);
 
   const customServerSideGeneratedIds = _defaultTo(true)(serverSideGeneratedIds);
 
-  const customBeforeKey = _defaultTo('before')(beforeKey);
-
-  const customHasAfterKey = _defaultTo('has_after')(hasAfterKey);
-
-  const customAfterKey = _defaultTo('after')(afterKey);
-
   const customEnvelopParamName = _defaultTo('envelope')(envelopParamName);
-  const customPaginationKey = _defaultTo('pagination')(paginationKey);
   const customPrettyParamName = _defaultTo('pretty')(prettyParamName);
-  const customDataKeyName = _defaultTo('data', dataKeyName);
 
   const facadeConfig: FacadeConfig<I> = {
-    afterHeaderName: customAfterHeaderName,
-    afterKey: customAfterKey,
-    beforeHeaderName: customBeforeHeaderName,
-    beforeKey: customBeforeKey,
     convertDocumentIntoItem: ({ document }) => document,
     convertItemIntoDocument: ({ item }) => item,
     createFilter: ({ filter }) => filter,
     createPatch: ({ document }) => document,
-    dataKeyName: customDataKeyName,
     defaultPaginationLimit: 10,
     defaultSort: customDefaultSort,
     defaultTransactionHandler,
     envelopeParamName: customEnvelopParamName,
-    hasAfterHeaderName: customHasAfterHeaderName,
-    hasAfterKey: customHasAfterKey,
-    hasBeforeHeaderName: customHasBeforeHeaderName,
-    hasBeforeKey: customHasBeforeKey,
-    paginationKey: customPaginationKey,
     prettyParamName: customPrettyParamName,
     serverSideGeneratedIds: customServerSideGeneratedIds,
-    totalHeaderName: customTotalHeaderName,
-    totalKey: customTotalKey,
     ...config,
   };
 

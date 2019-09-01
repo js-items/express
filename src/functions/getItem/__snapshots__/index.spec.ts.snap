@@ -2,14 +2,14 @@
 
 exports[`@getItem get item when envelope is enabled and pretty response is disabled 1`] = `
 Object {
-  "headers": Object {
-    "x-powered-by": "Express",
-  },
-  "response": Object {
+  "body": Object {
     "booleanProperty": false,
     "id": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
     "numberProperty": 1,
     "stringProperty": "foo",
+  },
+  "headers": Object {
+    "x-powered-by": "Express",
   },
   "status": 200,
 }

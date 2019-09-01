@@ -4,20 +4,20 @@ exports[`@deleteItem delete item 1`] = `Object {}`;
 
 exports[`@deleteItem delete item when envelope is enabled and pretty response is disabled 1`] = `
 Object {
+  "body": Object {},
   "headers": Object {
     "x-powered-by": "Express",
   },
-  "response": Object {},
   "status": 204,
 }
 `;
 
 exports[`@deleteItem delete item when envelope is enabled and pretty response is enabled 1`] = `
 Object {
+  "body": Object {},
   "headers": Object {
     "x-powered-by": "Express",
   },
-  "response": Object {},
   "status": 204,
 }
 `;
@@ -32,13 +32,13 @@ Object {
 
 exports[`@deleteItem throws not found error when item does not exist and envelope is enabled and pretty is disabled 1`] = `
 Object {
-  "headers": Object {
-    "x-powered-by": "Express",
-  },
-  "response": Object {
+  "body": Object {
     "itemId": "6da9dce6-be40-4fac-bd9c-6a2f348a1c87",
     "itemName": "item",
     "transactionId": "1",
+  },
+  "headers": Object {
+    "x-powered-by": "Express",
   },
   "status": 404,
 }

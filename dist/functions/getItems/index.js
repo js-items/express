@@ -39,8 +39,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var boolean_1 = __importDefault(require("boolean"));
-var http_status_codes_1 = require("http-status-codes");
 var defaultTo_1 = __importDefault(require("ramda/src/defaultTo"));
 var isNil_1 = __importDefault(require("ramda/src/isNil"));
 var getJsonQueryParam_1 = __importDefault(require("../../utils/getJsonQueryParam"));
@@ -54,9 +52,9 @@ var getItems = function (config) { return function (req, res) { return __awaiter
             case 0:
                 transactionHandler = defaultTo_1.default(config.defaultTransactionHandler)(config.beforeGetItems);
                 return [4 /*yield*/, transactionHandler({ req: req, res: res }, function () { return __awaiter(_this, void 0, void 0, function () {
-                        var _a, _b, _c, filter, sort, limit, createdFilter, _d, cursor, items, totalCount, count, responseHeaders, responseData, nestedObject, enveloped, responseObject, headers;
-                        return __generator(this, function (_e) {
-                            switch (_e.label) {
+                        var filter, sort, limit, createdFilter, _a, cursor, items, totalCount, count, data, body;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
                                 case 0:
                                     filter = getJsonQueryParam_1.default(req.query, 'filter');
                                     sort = !isNil_1.default(req.query.sort)
@@ -74,40 +72,30 @@ var getItems = function (config) { return function (req, res) { return __awaiter
                                             sort: sort,
                                         })];
                                 case 1:
-                                    _d = _e.sent(), cursor = _d.cursor, items = _d.items;
+                                    _a = _b.sent(), cursor = _a.cursor, items = _a.items;
                                     if (!(config.service.countItems !== undefined)) return [3 /*break*/, 3];
                                     return [4 /*yield*/, config.service.countItems({
                                             filter: createdFilter,
                                         })];
                                 case 2:
-                                    count = (_e.sent()).count;
+                                    count = (_b.sent()).count;
                                     totalCount = count;
-                                    _e.label = 3;
+                                    _b.label = 3;
                                 case 3:
-                                    responseHeaders = (_a = {},
-                                        _a[config.afterHeaderName] = cursor.after,
-                                        _a[config.beforeHeaderName] = cursor.before,
-                                        _a[config.hasBeforeHeaderName] = cursor.hasBefore.toString(),
-                                        _a[config.hasAfterHeaderName] = cursor.hasAfter.toString(),
-                                        _a[config.totalHeaderName] = totalCount,
-                                        _a);
-                                    responseData = items.map(function (item) {
+                                    data = items.map(function (item) {
                                         return config.convertItemIntoDocument({ item: item, req: req, res: res });
                                     });
-                                    nestedObject = (_b = {},
-                                        _b[config.paginationKey] = (_c = {},
-                                            _c[config.afterKey] = cursor.after,
-                                            _c[config.beforeKey] = cursor.before,
-                                            _c[config.hasBeforeKey] = cursor.hasBefore,
-                                            _c[config.hasAfterKey] = cursor.hasAfter,
-                                            _c[config.totalKey] = totalCount,
-                                            _c),
-                                        _b[config.dataKeyName] = responseData,
-                                        _b);
-                                    enveloped = boolean_1.default(req.query[config.envelopeParamName]);
-                                    responseObject = enveloped ? nestedObject : responseData;
-                                    headers = enveloped ? {} : responseHeaders;
-                                    sendResponse_1.default({ req: req, res: res, config: config, status: http_status_codes_1.OK, headers: headers, responseObject: responseObject });
+                                    body = {
+                                        data: data,
+                                        pagination: {
+                                            after: defaultTo_1.default(null)(cursor.after),
+                                            before: defaultTo_1.default(null)(cursor.before),
+                                            hasAfter: cursor.hasAfter,
+                                            hasBefore: cursor.hasBefore,
+                                            totalCount: totalCount !== undefined ? totalCount : 0,
+                                        },
+                                    };
+                                    sendResponse_1.default({ req: req, res: res, config: config, body: body });
                                     return [2 /*return*/];
                             }
                         });

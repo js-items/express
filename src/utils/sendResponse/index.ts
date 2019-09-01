@@ -7,7 +7,6 @@ import { OK } from 'http-status-codes';
 import _mapObjIndexed from 'ramda/src/mapObjIndexed';
 
 export interface Config {
-  readonly dataKeyName: string;
   readonly prettyParamName: string;
   readonly envelopeParamName: string;
   readonly [key: string]: any;
@@ -17,35 +16,33 @@ export interface Options {
   readonly req: Request;
   readonly res: Response;
   readonly config?: Config;
-  readonly status: number;
-  readonly responseObject?: any;
+  readonly status?: number;
+  readonly body?: any;
   readonly headers?: OutgoingHttpHeaders;
 }
 
 const defaultConfig = {
-  dataKeyName: 'data',
   envelopeParamName: 'envelope',
   prettyParamName: 'pretty',
 };
 
+/* istanbul ignore next */
 export const sendEnvelopedResponse = ({
   config = defaultConfig,
   headers,
   req,
   res,
-  responseObject,
-  status,
+  body = {},
+  status = OK,
 }: Options) => {
   /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#envelope */
   res.status(OK);
 
   const combinedHeaders = { ...res.getHeaders(), ...headers };
 
-  const response = responseObject !== undefined ? responseObject : {};
-
   const data = {
+    body,
     headers: combinedHeaders,
-    response,
     status,
   };
 
@@ -53,19 +50,20 @@ export const sendEnvelopedResponse = ({
   if (req.query[config.prettyParamName] === 'false') {
     return res.json(data);
   }
-  
-  res.setHeader('Content-Type','application/json');
+
+  res.setHeader('Content-Type', 'application/json');
 
   return res.send(JSON.stringify(data, null, 2));
 };
 
+/* istanbul ignore next */
 export const sendNormalResponse = ({
   config = defaultConfig,
   headers,
   req,
   res,
-  responseObject,
-  status,
+  body,
+  status = OK,
 }: Options) => {
   res.status(status);
 
@@ -77,18 +75,18 @@ export const sendNormalResponse = ({
     }, headers);
   }
 
-  if (responseObject === undefined) {
+  if (body === undefined) {
     return res.send();
   }
 
   /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pretty */
   if (req.query[config.prettyParamName] === 'false') {
-    return res.json(responseObject);
+    return res.json(body);
   }
 
-  res.setHeader('Content-Type','application/json');
+  res.setHeader('Content-Type', 'application/json');
 
-  return res.send(JSON.stringify(responseObject, null, 2));
+  return res.send(JSON.stringify(body, null, 2));
 };
 
 const sendResponse = ({ config = defaultConfig, ...rest }: Options) =>

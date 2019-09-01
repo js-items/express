@@ -19,9 +19,9 @@ const handleError: ErrorHandler = ({ req, res, err, transactionId }) => {
     };
     
     sendResponse({
+      body: data,
       req,
       res,
-      responseObject: data,
       status: statusCode,
     });
   };

@@ -78,10 +78,10 @@ var createItem = function (config) { return function (req, res) { return __await
                                     item = (_a.sent()).item;
                                     req.body.id = id;
                                     sendResponse_1.default({
+                                        body: config.convertItemIntoDocument({ item: item, req: req, res: res }),
                                         config: config,
                                         req: req,
                                         res: res,
-                                        responseObject: config.convertItemIntoDocument({ item: item, req: req, res: res }),
                                         status: http_status_codes_1.CREATED,
                                     });
                                     return [2 /*return*/];
