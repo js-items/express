@@ -1,4 +1,4 @@
-import { Item } from '@js-items/foundation';
+import { Item, PaginatedResponse } from '@js-items/foundation';
 import { Request, Response } from 'express';
 import _defaultTo from 'ramda/src/defaultTo';
 import _isNil from 'ramda/src/isNil';
@@ -54,7 +54,8 @@ const getItems: RequestHandlerFactory = <I extends Item>(
       config.convertItemIntoDocument({ item, req, res })
     );
 
-    const body = {
+    // TODO: check other handlers for aligning responses
+    const body: PaginatedResponse<I> = {
       data,
       pagination: {
         after: _defaultTo(null)(cursor.after),
