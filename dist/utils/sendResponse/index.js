@@ -32,6 +32,7 @@ var defaultConfig = {
     envelopeParamName: 'envelope',
     prettyParamName: 'pretty',
 };
+/* istanbul ignore next */
 exports.sendEnvelopedResponse = function (_a) {
     var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, _c = _a.body, body = _c === void 0 ? {} : _c, _d = _a.status, status = _d === void 0 ? http_status_codes_1.OK : _d;
     /* credits: https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#envelope */
@@ -49,6 +50,7 @@ exports.sendEnvelopedResponse = function (_a) {
     res.setHeader('Content-Type', 'application/json');
     return res.send(JSON.stringify(data, null, 2));
 };
+/* istanbul ignore next */
 exports.sendNormalResponse = function (_a) {
     var _b = _a.config, config = _b === void 0 ? defaultConfig : _b, headers = _a.headers, req = _a.req, res = _a.res, body = _a.body, _c = _a.status, status = _c === void 0 ? http_status_codes_1.OK : _c;
     res.status(status);

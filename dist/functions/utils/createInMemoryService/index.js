@@ -13,6 +13,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Cursor_1 = require("@js-items/foundation/dist/interfaces/Cursor");
 var defaultPromise = function () { return Promise.resolve(); };
+/* istanbul ignore next */
 var createInMemoryService = function (factoryConfig) { return (__assign({ countItems: function () { return Promise.resolve({ count: 1 }); }, createItem: function (_a) {
         var item = _a.item;
         return Promise.resolve({ item: item });
