@@ -36,7 +36,7 @@
     "@types/express": "4.17.1",
     "@types/jest": "24.0.18",
     "@types/node": "11.13.21",
-    "@types/ramda": "0.26.25",
+    "@types/ramda": "0.26.26",
     "@types/source-map-support": "0.5.0",
     "@types/supertest": "2.0.8",
     "@types/uuid": "3.4.5",
