@@ -47,7 +47,7 @@
     "ts-jest": "24.1.0",
     "tslint": "5.20.0",
     "tslint-config-prettier": "1.18.0",
-    "typescript": "3.6.3"
+    "typescript": "3.9.10"
   },
   "dependencies": {
     "body-parser": "1.19.0",
