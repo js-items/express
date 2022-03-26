@@ -38,7 +38,7 @@
     "@types/node": "11.13.22",
     "@types/ramda": "0.26.26",
     "@types/source-map-support": "0.5.0",
-    "@types/supertest": "2.0.8",
+    "@types/supertest": "2.0.12",
     "@types/uuid": "3.4.5",
     "jest": "24.9.0",
     "rimraf": "3.0.0",
